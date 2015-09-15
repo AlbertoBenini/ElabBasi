@@ -24,7 +24,7 @@ public class RecuperoDati implements Serializable {
 	private String queryStrum = "SELECT s.cod, s.nome, d.nomed FROM strumento s FULL JOIN incarico d ON s.cod = d.cods";
 	private  String queryDettStrum = "SELECT * FROM strumento WHERE cod = '";
 	private String queryAllMan="SELECT * FROM Manutenzione";
-	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.NomeD FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
+	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
 	
 	/*==========================costruttori====================================*/
 	public RecuperoDati() throws ClassNotFoundException {
