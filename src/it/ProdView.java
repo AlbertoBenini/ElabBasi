@@ -60,6 +60,9 @@ public class ProdView implements Serializable {
   }
   
   public List<Manap> getManutenzione(){
+	  /*TODO
+	   * Bisogna passare il codice dello strumento per la query, come fatto sopra per il codice
+	   */
   if(this.ds != null) {
     manutenzione=ds.getManap();
     }

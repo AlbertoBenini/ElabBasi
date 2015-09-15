@@ -29,7 +29,11 @@
   	 	<h:dataTable value="#{dati.manutenzione}" var="u" border="1" style="margin: 0px auto">
   	  <h:column>
   	  <f:facet name="header">Data </f:facet>
-         value="#{c.data}"
+  	  	<!-- TODO 
+  	  		Mi devi spiegare a che serve questo... Sarebbe tutta la parte relativa
+  	  		a lo storico delle operazioni di manutenzione?
+  	  	 -->
+         value="#{c.data }"
        </h:column>
   	 </h:dataTable>
   	
