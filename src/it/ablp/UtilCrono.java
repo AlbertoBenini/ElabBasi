@@ -14,7 +14,7 @@ public class UtilCrono implements Serializable {
 		dataf=null;
 		motivo=null;
 		resp=null;
-		//cods=null;
+	//cods=null;
 		nomed=null;
 		}
 	
@@ -45,14 +45,14 @@ public class UtilCrono implements Serializable {
 	public String getResp(){
 		return this.resp;
 	}
-	
-	/*public void setCods(String cods){
+	/*
+	public void setCods(String cods){
 		this.cods=cods;
 	}
 	public String getCods(){
 		return this.cods;
-	}*/
-	
+	}
+	*/
 	public void setNomed(String nomed){
 		this.nomed=nomed;
 	}

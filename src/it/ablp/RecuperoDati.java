@@ -83,7 +83,9 @@ public class RecuperoDati implements Serializable {
   	/*=====FINE BEAN=====*/
   	
   	/*===RECUPERO DATI DA DATABASE===*/
-  	public List<Manap> getManap() {
+  	public List<Manap> getManap(String cod) {
+  		
+  		 queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data DESC";
   			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -151,7 +153,8 @@ public class RecuperoDati implements Serializable {
 			return result;
   		}
   		
-  		public List<UtilCrono> getUtilizzi() {
+  		public List<UtilCrono> getUtilizzi(String cod) {
+  			 queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn DESC";
   			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;

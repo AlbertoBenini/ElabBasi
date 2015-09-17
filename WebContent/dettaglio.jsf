@@ -2,45 +2,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"  >
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-  <title>Dettaglio strumento</title>
+	<title>Dettaglio strumento</title>
 </h:head>
 
 
 <h:body>
-  <h:form>
-  	<h1>#{dati.pollo.nome} </h1>
-  	<h3>Codice: #{dati.pollo.cod }</h3>
-  	<h3>Potenza: #{dati.pollo.watt } Watt</h3>
-  	<h3>Ditta produttrice: #{dati.pollo.ditta }</h3>
-  	<h3>Modello: #{dati.pollo.modello }</h3>
-  	<h3>Costo: #{dati.pollo.costo } €</h3>
-  	<h3>Anno acquisto: #{dati.pollo.annoaq }</h3>
-  	
-  	<h:dataTable value="#{dati.utilizzi}" var="c" border="1" style="margin: 0px auto">
-  	  <h:column>
-  	  <f:facet name="header">Data Inizio</f:facet>
-         Data inizio = #{c.datain }
-       </h:column>
-  	 </h:dataTable>
-  	 
-  	 	<h:dataTable value="#{dati.manutenzione}" var="u" border="1" style="margin: 0px auto">
-  	  <h:column>
-  	  <f:facet name="header">Data </f:facet>
-  	  	<!-- TODO 
-  	  		Mi devi spiegare a che serve questo... Sarebbe tutta la parte relativa
-  	  		a lo storico delle operazioni di manutenzione?
-  	  	 -->
-         value="#{c.data }"
-       </h:column>
-  	 </h:dataTable>
-  	
-	
+	<h:form>
+		<h1>#{dati.pollo.nome}</h1>
+		<h3>Codice: #{dati.pollo.cod }</h3>
+		<h3>Potenza: #{dati.pollo.watt } Watt</h3>
+		<h3>Ditta produttrice: #{dati.pollo.ditta }</h3>
+		<h3>Modello: #{dati.pollo.modello }</h3>
+		<h3>Costo: #{dati.pollo.costo } €</h3>
+		<h3>Anno acquisto: #{dati.pollo.annoaq }</h3>
+	</h:form>
+	<h:form>
+		<h:dataTable value="#{dati.utilizzi(dati.pollo.cod)}" var="c"
+			border="1" style="margin: 0px auto">
+			<h:column>
+				<f:facet name="header">Data Inizio</f:facet>
+		          #{c.datain }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Data Fine</f:facet>
+		          #{c.dataf }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Motivo</f:facet>
+		        #{c.motivo }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Responsabile</f:facet>
+		         #{c.resp}
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Dipartimento</f:facet>
+		         #{c.nomed }
+		       </h:column>
+		</h:dataTable>
+		<br />
+		<br />
+	</h:form>
+	<h:form>
+		<h:dataTable value="#{dati.manutenzione(dati.pollo.cod)}" var="u"
+			border="1" style="margin: 0px auto">
+			<h:column>
+				<f:facet name="header">Data </f:facet>
+		        #{u.data }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Durata</f:facet>
+		          #{u.durata}
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Numero operatori</f:facet>
+		          #{u.numop }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">ID ditta</f:facet>
+		         #{u.iditta}
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Urgenza</f:facet>
+		          #{u.urgenza}
+		       </h:column>
+			<h:column>
+				<f:facet name="header">Costo</f:facet>
+		          #{u.costo }  €
+		       </h:column>
 
-  <h:outputLink value="index.jsf">Pagina iniziale</h:outputLink>
+		</h:dataTable>
+	</h:form>
+	<h:outputLink value="index.jsf">Pagina iniziale</h:outputLink>
 
-</h:form>
+
 </h:body>
 </html>

@@ -30,6 +30,7 @@ public class ProdView implements Serializable {
     this.strumenti = null;
     this.pollo = null;
     this.manutenzione=null;
+    this.utilizzi=null;
   }
 
   @PostConstruct
@@ -58,20 +59,17 @@ public class ProdView implements Serializable {
   public StrSel getPollo() {
     	return pollo;
   }
-  
-  public List<Manap> getManutenzione(){
-	  /*TODO
-	   * Bisogna passare il codice dello strumento per la query, come fatto sopra per il codice
-	   */
-  if(this.ds != null) {
-    manutenzione=ds.getManap();
+ 
+  public List<Manap> manutenzione(String cod){
+	if(this.ds != null) {
+    manutenzione=ds.getManap(cod);
     }
       return manutenzione;
       }
-  
- public List<UtilCrono> getUtilizzi(){
+ 
+ public List<UtilCrono> utilizzi(String cod){
 	 if(this.ds!=null){
-		 utilizzi=ds.getUtilizzi();
+		 utilizzi=ds.getUtilizzi(cod);
 	 }
 	 return utilizzi;
  }
