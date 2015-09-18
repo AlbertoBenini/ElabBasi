@@ -1,4 +1,5 @@
 package it;
+import it.ablp.Carico;
 import it.ablp.Manap;
 import it.ablp.RecuperoDati;
 import it.ablp.Strumento;
@@ -23,6 +24,7 @@ public class ProdView implements Serializable {
   private StrSel pollo;
   private List<Manap> manutenzione;  
   private List<UtilCrono> utilizzi;
+  private Carico carico;
 
   // === Methods ===============================================================
 
@@ -31,6 +33,7 @@ public class ProdView implements Serializable {
     this.pollo = null;
     this.manutenzione=null;
     this.utilizzi=null;
+    this.carico=null;
   }
 
   @PostConstruct
@@ -72,5 +75,9 @@ public class ProdView implements Serializable {
 		 utilizzi=ds.getUtilizzi(cod);
 	 }
 	 return utilizzi;
+ }
+ 
+ public Carico carico(){
+	 	 return carico;
  }
 }

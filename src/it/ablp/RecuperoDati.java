@@ -79,6 +79,11 @@ public class RecuperoDati implements Serializable {
 		    return bean;
 	  	}
 
+	  	private Carico makeCaricoBean() throws SQLException{
+	  		Carico bean= new Carico();
+	  		bean.setTesto("Viva la focaccia");
+	  		return bean;
+	  	}
   	
   	/*=====FINE BEAN=====*/
   	
@@ -87,24 +92,20 @@ public class RecuperoDati implements Serializable {
   		
   		 queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data DESC";
   			Connection con = null;
-			PreparedStatement pstmt = null;
+			Statement stmt = null;
 			ResultSet rs = null;
 			List<Manap> result = new ArrayList<Manap>();
 			try {
-			  // tentativo di connessione al database
-			  con = DriverManager.getConnection( url, user, passwd );
-			  // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-			  pstmt = con.prepareStatement( queryAllMan );
-			  pstmt.clearParameters();
-			  // imposto i parametri della query
-			  //pstmt.setInt( 1, id );
-			  // eseguo la query
-			  rs = pstmt.executeQuery();
-			  // memorizzo il risultato dell'interrogazione in Vector di Bean
-			  if( rs.next() ) {
-				result.add( makeManapBean( rs ) );
-			  }
-
+				  // tentativo di connessione al database
+				  con = DriverManager.getConnection( url, user, passwd );
+				  // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+				  stmt = con.createStatement();
+				  // eseguo l'interrogazione desiderata
+				  rs = stmt.executeQuery( queryAllMan );
+				  // memorizzo il risultato dell'interrogazione nel Vector
+				  while( rs.next() ) {
+				    result.add( makeManapBean( rs ) );
+				  }
 			} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
 			  sqle.printStackTrace();
 
@@ -157,22 +158,20 @@ public class RecuperoDati implements Serializable {
   			 queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn DESC";
   			Connection con = null;
 			PreparedStatement pstmt = null;
+			Statement stmt = null;
 			ResultSet rs = null;
 			List<UtilCrono> result = new ArrayList<UtilCrono>();
 			try {
-			  // tentativo di connessione al database
-			  con = DriverManager.getConnection( url, user, passwd );
-			  // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-			  pstmt = con.prepareStatement( queryUtilCrono );
-			  pstmt.clearParameters();
-			  // imposto i parametri della query
-			  //pstmt.setInt( 1, id );
-			  // eseguo la query
-			  rs = pstmt.executeQuery();
-			  // memorizzo il risultato dell'interrogazione in Vector di Bean
-			  if( rs.next() ) {
-				result.add( makeUtilCronoBean( rs ) );
-			  }
+				  // tentativo di connessione al database
+				  con = DriverManager.getConnection( url, user, passwd );
+				  // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+				  stmt = con.createStatement();
+				  // eseguo l'interrogazione desiderata
+				  rs = stmt.executeQuery( queryUtilCrono );
+				  // memorizzo il risultato dell'interrogazione nel Vector
+				  while( rs.next() ) {
+				    result.add( makeUtilCronoBean( rs ) );
+				  }
 
 			} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
 			  sqle.printStackTrace();

@@ -30,5 +30,10 @@
       </h:column>
 		</h:dataTable>
 	</h:form>
+	
+	<h:outputLink value="carico.jsf">Inserisci un nuovo utilizzo</h:outputLink>
+	<br />
+	<h:outputLink value="manutenzione.jsf">Inserisci una nuova manutenzione</h:outputLink>
+	
 </h:body>
 </html>
