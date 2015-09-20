@@ -88,6 +88,36 @@ public class RecuperoDati implements Serializable {
   	/*=====FINE BEAN=====*/
   	
   	/*===RECUPERO DATI DA DATABASE===*/
+	public String getUtente(String username, String password) {
+		String queryUtenti = "Select id from persona where id='"+username+"' and psw='"+password+"'";
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String result = "";
+		try {
+			  // tentativo di connessione al database
+			  con = DriverManager.getConnection( url, user, passwd );
+			  // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+			  stmt = con.createStatement();
+			  // eseguo l'interrogazione desiderata
+			  rs = stmt.executeQuery( queryUtenti );
+			  // memorizzo il risultato dell'interrogazione nel Vector
+			  if( rs.next() ) {
+			    result =  rs.getString("id");
+			  }
+		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
+		  sqle.printStackTrace();
+
+		} finally { // alla fine chiudo la connessione.
+		  try {
+			con.close();
+		  } catch( SQLException sqle1 ) {
+			sqle1.printStackTrace();
+		  }
+		}
+		return result;
+	}
+	  	
   	public List<Manap> getManap(String cod) {
   		
   		 queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data DESC";

@@ -10,6 +10,15 @@
 
 
 <h:body>
+	<h1>Form di accesso:</h1>
+	<h:form>
+		Username: <h:inputText binding="#{username}" />
+		Password: <h:inputText binding="#{password}" /> <br />
+		<h:commandButton action="#{dati.sessione(username.value,password.value,'carico.jsf')}" value="Login e registra utilizzo"/>
+		<h:commandButton action="#{dati.sessione(username.value,password.value,'manutenzione.jsf')}" value="Login e registra manutenzione" /> 
+		<br />
+	</h:form>
+
 	<h1>Strumenti in uso</h1>
 	<br />
 	<br />

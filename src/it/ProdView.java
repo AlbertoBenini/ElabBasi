@@ -2,6 +2,7 @@ package it;
 import it.ablp.Carico;
 import it.ablp.Manap;
 import it.ablp.RecuperoDati;
+import it.ablp.Sessione;
 import it.ablp.Strumento;
 import it.ablp.StrSel;
 import it.ablp.UtilCrono;
@@ -9,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class ProdView implements Serializable {
     manutenzione=ds.getManap(cod);
     }
       return manutenzione;
-      }
+    }
  
  public List<UtilCrono> utilizzi(String cod){
 	 if(this.ds!=null){
@@ -80,4 +82,17 @@ public class ProdView implements Serializable {
  public Carico carico(){
 	 	 return carico;
  }
+ 
+ public String sessione(String nome, String password,String destinazione) {
+	String url = "errore.jsf";
+	String utente = ds.getUtente(nome,password);
+	Sessione sessione = Sessione.getInstance();
+	boolean esiste = sessione.setSessione(utente, password);
+	if(esiste) {
+		return destinazione;
+	}
+	
+	return url;
+ }
+ 
 }
