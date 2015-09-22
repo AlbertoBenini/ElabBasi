@@ -1,6 +1,6 @@
 package it;
 import it.ablp.Carico;
-import it.ablp.Manap;
+import it.ablp.Manutenzione;
 import it.ablp.RecuperoDati;
 import it.ablp.Sessione;
 import it.ablp.Strumento;
@@ -24,9 +24,10 @@ public class ProdView implements Serializable {
   private RecuperoDati ds;
   private List<Strumento> strumenti;
   private StrSel pollo;
-  private List<Manap> manutenzione;  
+  private List<Manutenzione> manutenzione;  
   private List<UtilCrono> utilizzi;
   private Carico carico;
+  private Manutenzione nuovaman;
 
   // === Methods ===============================================================
 
@@ -36,6 +37,7 @@ public class ProdView implements Serializable {
     this.manutenzione=null;
     this.utilizzi=null;
     this.carico=null;
+    this.nuovaman=null;
   }
 
   @PostConstruct
@@ -65,9 +67,9 @@ public class ProdView implements Serializable {
     	return pollo;
   }
  
-  public List<Manap> manutenzione(String cod){
+  public List<Manutenzione> manutenzione(String cod){
 	if(this.ds != null) {
-    manutenzione=ds.getManap(cod);
+    manutenzione=ds.getManutenzione(cod);
     }
       return manutenzione;
     }
@@ -93,6 +95,23 @@ public class ProdView implements Serializable {
 	}
 	
 	return url;
+ }
+ 
+ public  String insman( String cods, String data, String durata, int numop, String iditta, String urgenza, float costo){
+	 String pippo="orcoboia";
+	//String resultquery=null;
+	if(cods==null || data==null ||durata==null || numop==0 || iditta==null || urgenza==null || costo<=0.0f ) 
+		return null;
+	nuovaman.setCods(cods);
+	nuovaman.setCosto(costo);
+	nuovaman.setData(data);
+	nuovaman.setDurata(durata);
+	nuovaman.setIditta(iditta);
+	nuovaman.setNumop(numop);
+	nuovaman.setUrgenza(urgenza);
+	//resultquery="INSERT INTO manutenzione Values '"+cods+"',"+"'"+data+"',"+"'"+durata+"',"+"'"+numop+"',"+"'"+iditta+"',"+"'"+urgenza+"',"+"'"+costo+")";
+	ds.newManutenzione(nuovaman);
+	return pippo;
  }
  
 }
