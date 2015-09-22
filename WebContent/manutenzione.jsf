@@ -13,7 +13,7 @@
 	<h2>Inserire i dati richiesti per registrare una nuova
 		manutenzione:</h2>
 	<h:form>
-<h:panelGrid column="2">
+<h:panelGrid column="1">
 		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right; "   />
 		<br />
 		Data: <h:inputText binding="#{data}" style="text-align:right; "/>
@@ -31,11 +31,9 @@
 		<br />
 		
 </h:panelGrid>
-	<!-- action da sistemare è un banale copia incolla cosa va esso al posto di manutenzione.jsf??-->
 		<h:commandButton
-			action="#{dati.insman(cods.value,data.value,durata.value, numop.value, iditta.value, urgenza.value, costo.value)}"
+			action="#{dati.insman(cods.value,data.value,durata.value,numop.value,iditta.value,urgenza.value,costo.value)}"
 			value="Registra manutenzione" type="submit"/>
-
 		<br />
 	</h:form>
 

@@ -92,26 +92,37 @@ public class ProdView implements Serializable {
 	boolean esiste = sessione.setSessione(utente, password);
 	if(esiste) {
 		return destinazione;
-	}
-	
+	}	
 	return url;
  }
  
- public  String insman( String cods, String data, String durata, int numop, String iditta, String urgenza, float costo){
-	 String pippo="orcoboia";
-	//String resultquery=null;
-	if(cods==null || data==null ||durata==null || numop==0 || iditta==null || urgenza==null || costo<=0.0f ) 
-		return null;
-	nuovaman.setCods(cods);
-	nuovaman.setCosto(costo);
-	nuovaman.setData(data);
-	nuovaman.setDurata(durata);
-	nuovaman.setIditta(iditta);
-	nuovaman.setNumop(numop);
-	nuovaman.setUrgenza(urgenza);
-	//resultquery="INSERT INTO manutenzione Values '"+cods+"',"+"'"+data+"',"+"'"+durata+"',"+"'"+numop+"',"+"'"+iditta+"',"+"'"+urgenza+"',"+"'"+costo+")";
-	ds.newManutenzione(nuovaman);
-	return pippo;
+ public void insman( String cods, String data, String durata, String numop, String iditta, String urgenza, String costo){
+	this.nuovaman = new Manutenzione();
+	/*
+	 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
+	 * purtroppo gli oggetti tendono a dover essere inizializzati per poter essere usati.
+	 * Vedi riga superiore al commento.
+	 * Inoltre altro piccolo appunto personale, le funzioni chiamate da JSF salvo nuove scoperte
+	 * Accettano come paramentro solo stringhe. Sembrerebbe.
+	 * 
+	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
+	 * Sistemare l'eccezione data dal fatto che la query non restituisce nessun output,
+	 * quando a quanto pare ne deve restituire qualcuno.
+	 * Tuttavia ho controllato, e se l'inserimento è esatto la query viene inserita e viene data
+	 * l'eccezione "la query non restituisce nessun output" o qualcosa del genere.
+	 * 
+	 * C'est la vie. Per fare il melodrammatico. 
+	 */
+	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)) {
+		nuovaman.setCods(cods);
+		nuovaman.setCosto(Float.parseFloat(costo));
+		nuovaman.setData(data);
+		nuovaman.setDurata(durata);
+		nuovaman.setIditta(iditta);
+		nuovaman.setNumop(Integer.parseInt(numop));
+		nuovaman.setUrgenza(urgenza);
+		ds.newManutenzione(nuovaman);
+	}
  }
  
 }

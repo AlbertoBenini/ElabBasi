@@ -259,33 +259,39 @@ public class RecuperoDati implements Serializable {
 	public boolean newManutenzione(Manutenzione nuovaman)  {
 		// dichiarazione delle variabili
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		//PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		boolean res = true;
+		boolean res = false;
 		//String result=null;
-		String query="INSERT INTO manutenzione Values ('"+nuovaman.getCods()+"',"+"'"+nuovaman.getData()+"',"+"'"+nuovaman.getDurata()+"',"+"'"+nuovaman.getNumop()+"',"+"'"+nuovaman.getIditta()+"',"+"'"+nuovaman.getUrgenza()+"',"+"'"+nuovaman.getcosto()+")";
+		String query="INSERT INTO manutenzione Values ('"+nuovaman.getCods()+"',"+"'"+nuovaman.getData()+"',"+"'"+nuovaman.getDurata()+"',"+"'"+nuovaman.getNumop()+"',"+"'"+nuovaman.getIditta()+"',"+"'"+nuovaman.getUrgenza()+"',"+"'"+nuovaman.getcosto()+"')";
 		try {
 			// tentativo di connessione al database
 			con = DriverManager.getConnection( url, user, passwd );
 			// connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-			pstmt = con.prepareStatement(this.newMan);
-			pstmt.clearParameters();
+			//pstmt = con.prepareStatement(this.newMan);
+			//pstmt.clearParameters();
+			stmt = con.createStatement();
+			stmt.executeQuery(query);
+			res=true;
 			// eseguo l'interrogazione desiderata
 			/*rs = stmt.executeQuery( query );
 			// memorizzo il risultato dell'interrogazione nel Vector
 			if( rs.next() ) {
 				result = makeManutenzioneBean( rs );
 			}*/
-			pstmt.setString(1, nuovaman.getCods());
+			
+			
+			/*pstmt.setString(1, nuovaman.getCods());
 			pstmt.setString(2, nuovaman.getData());
 			pstmt.setString(3, nuovaman.getDurata());
 			pstmt.setInt(4, nuovaman.getNumop());
 			pstmt.setString(5, nuovaman.getIditta());
 			pstmt.setString(6, nuovaman.getUrgenza());
-			pstmt.setFloat(7, nuovaman.getcosto());
+			pstmt.setFloat(7, nuovaman.getcosto());*/
 
 			// eseguo la query
-			pstmt.executeUpdate();
+			//pstmt.executeUpdate();
 
 		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
 			sqle.printStackTrace();
