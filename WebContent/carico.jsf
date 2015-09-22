@@ -31,7 +31,7 @@
 			<br />
 			<br />
 		</h:panelGrid>
-	
+	<!-- action da sistemare  -->
 	<h:commandButton
 		action="#{dati.sessione(username.value,password.value,'carico.jsf')}"
 		value="Registra Utilizzo" />

@@ -31,7 +31,7 @@
 		<br />
 		
 </h:panelGrid>
-
+	<!-- action da sistemare è un banale copia incolla -->
 		<h:commandButton
 			action="#{dati.sessione(username.value,password.value,'carico.jsf')}"
 			value="Registra manutenzione" />
