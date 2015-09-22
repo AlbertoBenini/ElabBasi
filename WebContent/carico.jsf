@@ -8,9 +8,33 @@
 	<title>Carico</title>
 </h:head>
 
+
 <h:body>
-<h:form>
-<h1>Viva la focaccia!</h1>
-</h:form>
+
+	<h2>Inserire i dati richiesti per registrare un nuovo utilizzo:</h2>
+	<h:form>
+		<h:panelGrid column="1">
+		Codice Strumento: <h:inputText binding="#{cods}"
+				style="text-align:right; " />
+			<br />
+		Data inizio : <h:inputText binding="#{datai}" style="text-align:right; " />
+			<br />
+		Data fine : <h:inputText binding="#{dataf}" style="text-align:right; " />
+			<br />
+		Motivo: <h:inputText binding="#{motivo}" style="text-align:right;" />
+			<br />
+		Responsabile: <h:inputText binding="#{responsabile}"
+				style="text-align:right;" />
+			<br />
+		Nome dipartimento: <h:inputText binding="#{nomed}"
+				style="text-align:right;" />
+			<br />
+			<br />
+		</h:panelGrid>
+	
+	<h:commandButton
+		action="#{dati.sessione(username.value,password.value,'carico.jsf')}"
+		value="Registra Utilizzo" />
+		</h:form>
 </h:body>
 </html>

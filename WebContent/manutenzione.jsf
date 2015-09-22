@@ -9,8 +9,36 @@
 </h:head>
 
 <h:body>
-<h:form>
-<h1>Anche la pizza non è male!</h1>
-</h:form>
+
+	<h2>Inserire i dati richiesti per registrare una nuova
+		manutenzione:</h2>
+	<h:form>
+<h:panelGrid column="1">
+		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right; "   />
+		<br />
+		Data: <h:inputText binding="#{data}" style="text-align:right; "/>
+		<br />
+		Durata: <h:inputText binding="#{durata}" style="text-align:right;"/>
+		<br />
+		Numero operatori: <h:inputText binding="#{numop}" style="text-align:right;"/>
+		<br />
+		ID ditta: <h:inputText binding="#{iditta}" style="text-align:right;"/>
+		<br />
+		Urgenza: <h:inputText binding="#{urgenza}" style="text-align:right;"/>
+		<br />
+		Costo: <h:inputText binding="#{costo}" style="text-align:right;"/>
+		<br />
+		<br />
+		
+</h:panelGrid>
+
+		<h:commandButton
+			action="#{dati.sessione(username.value,password.value,'carico.jsf')}"
+			value="Registra manutenzione" />
+
+		<br />
+	</h:form>
+
+
 </h:body>
 </html>
