@@ -1,4 +1,5 @@
-package it.ablp;
+package it.ablp;//classe inutile in teoria
+
 
 public class Carico {
 	

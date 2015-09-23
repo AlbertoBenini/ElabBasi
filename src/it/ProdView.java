@@ -108,6 +108,9 @@ public class ProdView implements Serializable {
 	 * Accettano come paramentro solo stringhe. Sembrerebbe.
 	 * 
 	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
+	 * 
+	 * 	RIGUARDO I CONTROLLI: le uniche cose che specifica nella consegna sono di limitare i valori di urgenza a quelli sotto, quindi come controlli potremmo anche essere già a posto
+	 * 
 	 * C'est la vie. Per fare il melodrammatico. 
 	 */
 	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)&&(urgenza=="bassa" || urgenza=="media"|| urgenza=="elevata")) {
@@ -120,6 +123,10 @@ public class ProdView implements Serializable {
 		nuovaman.setUrgenza(urgenza); //deve essere limitata a elevata media e bassa	
 		ds.newManutenzione(nuovaman);
 	}
+	/*
+	 * Aggiunto un else in modo da non mandare in vacca tutto se uno non mette un campo o non rispetta i valori sopra
+	 */
+	else return;
  }
  
  public void insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed){
@@ -143,6 +150,7 @@ public class ProdView implements Serializable {
 			nuovoutil.setResp(resp);
 			ds.newUtilizzo(nuovoutil);
 		}
+		else return;
 	 }
  
 }
