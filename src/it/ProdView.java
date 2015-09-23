@@ -5,7 +5,7 @@ import it.ablp.RecuperoDati;
 import it.ablp.Sessione;
 import it.ablp.Strumento;
 import it.ablp.StrSel;
-import it.ablp.UtilCrono;
+import it.ablp.Utilizzo;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,9 +25,10 @@ public class ProdView implements Serializable {
   private List<Strumento> strumenti;
   private StrSel pollo;
   private List<Manutenzione> manutenzione;  
-  private List<UtilCrono> utilizzi;
+  private List<Utilizzo> utilizzi;
   private Carico carico;
   private Manutenzione nuovaman;
+  private Utilizzo nuovoutil;
 
   // === Methods ===============================================================
 
@@ -38,6 +39,7 @@ public class ProdView implements Serializable {
     this.utilizzi=null;
     this.carico=null;
     this.nuovaman=null;
+    this.nuovoutil=null;
   }
 
   @PostConstruct
@@ -74,7 +76,7 @@ public class ProdView implements Serializable {
       return manutenzione;
     }
  
- public List<UtilCrono> utilizzi(String cod){
+ public List<Utilizzo> utilizzi(String cod){
 	 if(this.ds!=null){
 		 utilizzi=ds.getUtilizzi(cod);
 	 }
@@ -106,23 +108,41 @@ public class ProdView implements Serializable {
 	 * Accettano come paramentro solo stringhe. Sembrerebbe.
 	 * 
 	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
-	 * Sistemare l'eccezione data dal fatto che la query non restituisce nessun output,
-	 * quando a quanto pare ne deve restituire qualcuno.
-	 * Tuttavia ho controllato, e se l'inserimento è esatto la query viene inserita e viene data
-	 * l'eccezione "la query non restituisce nessun output" o qualcosa del genere.
-	 * 
 	 * C'est la vie. Per fare il melodrammatico. 
 	 */
-	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)) {
+	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)&&(urgenza=="bassa" || urgenza=="media"|| urgenza=="elevata")) {
 		nuovaman.setCods(cods);
 		nuovaman.setCosto(Float.parseFloat(costo));
 		nuovaman.setData(data);
 		nuovaman.setDurata(durata);
 		nuovaman.setIditta(iditta);
 		nuovaman.setNumop(Integer.parseInt(numop));
-		nuovaman.setUrgenza(urgenza);
+		nuovaman.setUrgenza(urgenza); //deve essere limitata a elevata media e bassa	
 		ds.newManutenzione(nuovaman);
 	}
  }
+ 
+ public void insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed){
+		this.nuovoutil = new Utilizzo();
+		/*
+		 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
+		 * purtroppo gli oggetti tendono a dover essere inizializzati per poter essere usati.
+		 * Vedi riga superiore al commento.
+		 * Inoltre altro piccolo appunto personale, le funzioni chiamate da JSF salvo nuove scoperte
+		 * Accettano come paramentro solo stringhe. Sembrerebbe.
+		 * 
+		 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
+		 * C'est la vie. Per fare il melodrammatico. 
+		 */
+		if(!(cods==null || datain==null || dataf==null || motivo==null || resp==null || nomed==null)) {
+			nuovoutil.setCods(cods);
+			nuovoutil.setDatain(datain);
+			nuovoutil.setDataf(dataf);
+			nuovoutil.setMotivo(motivo);
+			nuovoutil.setNomed(nomed);
+			nuovoutil.setResp(resp);
+			ds.newUtilizzo(nuovoutil);
+		}
+	 }
  
 }

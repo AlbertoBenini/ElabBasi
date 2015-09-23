@@ -35,6 +35,8 @@
 			action="#{dati.insman(cods.value,data.value,durata.value,numop.value,iditta.value,urgenza.value,costo.value)}"
 			value="Registra manutenzione" type="submit"/>
 		<br />
+		<br />
+		<li><h:outputLink value="index.jsf">Home Page</h:outputLink></li>
 	</h:form>
 
 

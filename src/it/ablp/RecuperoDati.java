@@ -58,8 +58,8 @@ public class RecuperoDati implements Serializable {
 		return bean;
 	}
 
-	private UtilCrono makeUtilCronoBean(ResultSet rs) throws SQLException{
-		UtilCrono bean=new UtilCrono();
+	private Utilizzo makeUtilCronoBean(ResultSet rs) throws SQLException{
+		Utilizzo bean=new Utilizzo();
 		bean.setDatain(rs.getString("datain"));
 		bean.setDataf(rs.getString("dataf"));
 		bean.setMotivo(rs.getString("motivo"));
@@ -190,13 +190,13 @@ public class RecuperoDati implements Serializable {
 		return result;
 	}
 
-	public List<UtilCrono> getUtilizzi(String cod) {
+	public List<Utilizzo> getUtilizzi(String cod) {
 		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn DESC";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		List<UtilCrono> result = new ArrayList<UtilCrono>();
+		List<Utilizzo> result = new ArrayList<Utilizzo>();
 		try {
 			// tentativo di connessione al database
 			con = DriverManager.getConnection( url, user, passwd );
@@ -272,7 +272,58 @@ public class RecuperoDati implements Serializable {
 			//pstmt = con.prepareStatement(this.newMan);
 			//pstmt.clearParameters();
 			stmt = con.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
+			res=true;
+			// eseguo l'interrogazione desiderata
+			/*rs = stmt.executeQuery( query );
+			// memorizzo il risultato dell'interrogazione nel Vector
+			if( rs.next() ) {
+				result = makeManutenzioneBean( rs );
+			}*/
+			
+			
+			/*pstmt.setString(1, nuovaman.getCods());
+			pstmt.setString(2, nuovaman.getData());
+			pstmt.setString(3, nuovaman.getDurata());
+			pstmt.setInt(4, nuovaman.getNumop());
+			pstmt.setString(5, nuovaman.getIditta());
+			pstmt.setString(6, nuovaman.getUrgenza());
+			pstmt.setFloat(7, nuovaman.getcosto());*/
+
+			// eseguo la query
+			//pstmt.executeUpdate();
+
+		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
+			sqle.printStackTrace();
+
+		} finally { // alla fine chiudo la connessione.
+			try {
+				con.close();
+			} catch( SQLException sqle1 ) {
+				sqle1.printStackTrace();
+			}
+		}
+		
+		return res;
+	}
+	
+	public boolean newUtilizzo(Utilizzo nuovoutil)  {
+		// dichiarazione delle variabili
+		Connection con = null;
+		//PreparedStatement pstmt = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		boolean res = false;
+		//String result=null;
+		String query="INSERT INTO utstr Values ('"+nuovoutil.getDatain()+"',"+"'"+nuovoutil.getDataf()+"',"+"'"+nuovoutil.getMotivo()+"',"+"'"+nuovoutil.getResp()+"',"+"'"+nuovoutil.getCods()+"',"+"'"+nuovoutil.getNomed()+"')";
+		try {
+			// tentativo di connessione al database
+			con = DriverManager.getConnection( url, user, passwd );
+			// connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+			//pstmt = con.prepareStatement(this.newMan);
+			//pstmt.clearParameters();
+			stmt = con.createStatement();
+			stmt.executeUpdate(query);  //con update non genera l'eccezzione del dover ritornare qualcosa
 			res=true;
 			// eseguo l'interrogazione desiderata
 			/*rs = stmt.executeQuery( query );

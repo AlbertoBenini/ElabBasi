@@ -20,6 +20,7 @@
 		<h3>Anno acquisto: #{dati.pollo.annoaq }</h3>
 	</h:form>
 	<h:form>
+	<h2>Utilizzi</h2>
 		<h:dataTable value="#{dati.utilizzi(dati.pollo.cod)}" var="c"
 			border="1" style="margin: 0px auto">
 			<h:column>
@@ -47,6 +48,7 @@
 		<br />
 	</h:form>
 	<h:form>
+	<h2>Manutenzioni </h2>
 		<h:dataTable value="#{dati.manutenzione(dati.pollo.cod)}" var="u"
 			border="1" style="margin: 0px auto">
 			<h:column>
