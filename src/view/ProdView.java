@@ -33,6 +33,7 @@ public class ProdView implements Serializable {
   private Manutenzione editman;
   private Utilizzo nuovoutil;
   private List<Manutenzione> openman;
+  
 
   
   // === Methods ===============================================================
@@ -191,7 +192,19 @@ public class ProdView implements Serializable {
 		 daTornare=this.editman;
 	 } else {
 		daTornare = this.editman;
-		this.editman = null;
+		//this.editman = null;
+		
+		/*
+		 * TODO:
+		 * Mi è venuto in mente un modo per risolvere la questione Manutenzione
+		 * che rimangono i dati dentro... Semplicemente quanto chiamiamo la pagina,
+		 * se viene chiamata dal link settiamo l'oggetto vuoto, mentre
+		 * se viene chiamata dalla pagina sessioni aperte riempiamo l'oggetto.
+		 * Direi che è molto più semplice. Poi dobbiamo fare due parole sulla sessione...
+		 * Cioè come facciamo a vedere se l'utente è loggato o no e quindi permettere l'inserimento?
+		 * 
+		 */
+		
 	 }
 	 return daTornare;
  }
