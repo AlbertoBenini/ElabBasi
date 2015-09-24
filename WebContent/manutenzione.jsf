@@ -14,7 +14,7 @@
 		manutenzione:</h2>
 	<h:form>
 <h:panelGrid column="1">
-		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right" value="#{dati.editman.cods}"  " />
+		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right" />
 		<br />
 		Data: <h:inputText binding="#{data}" style="text-align:right; "/>
 		<br />

@@ -12,6 +12,8 @@
 
 <h:body>
 	<h:form>
+	<h2>Manutenzioni aperte:</h2>
+	<br/>
 		<h:dataTable value="#{dati.openman()}" var="u" border="1"
 			style="margin: 0px auto">
 			<h:column>
