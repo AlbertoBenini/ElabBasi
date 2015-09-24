@@ -14,7 +14,7 @@
 		manutenzione:</h2>
 	<h:form>
 <h:panelGrid column="1">
-		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right" />
+		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right" value="#{dati.editman.cods }" />
 		<br />
 		Data: <h:inputText binding="#{data}" style="text-align:right; "/>
 		<br />
@@ -32,7 +32,7 @@
 		
 </h:panelGrid>
 		<h:commandButton
-			action="#{dati.insman(cods.value,data.value,durata.value,numop.value,iditta.value,urgenza.value,costo.value)}"
+			action="#{dati.insman(cods.value,data.value,durata.value,numop.value,iditta.value,urgenza.value,costo.value, 'okInserimento.jsf')}"
 			value="Registra manutenzione" type="submit"/>
 		<br />
 		<br />

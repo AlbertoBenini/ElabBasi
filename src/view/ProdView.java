@@ -105,7 +105,7 @@ public class ProdView implements Serializable {
 	return url;
  }
  
- public void insman( String cods, String data, String durata, String numop, String iditta, String urgenza, String costo){
+ public String insman( String cods, String data, String durata, String numop, String iditta, String urgenza, String costo, String destinazione){
 	this.nuovaman = new Manutenzione();
 	/*
 	 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
@@ -120,7 +120,7 @@ public class ProdView implements Serializable {
 	 * 
 	 * C'est la vie. Per fare il melodrammatico. 
 	 */
-	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)&&(urgenza=="bassa" || urgenza=="media"|| urgenza=="elevata")) {
+	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)&&(urgenza.compareTo("bassa")==0|| urgenza.compareTo("media")==0|| urgenza.compareTo("elevata")==0)) {
 		nuovaman.setCods(cods);
 		nuovaman.setCosto(Float.parseFloat(costo));
 		nuovaman.setData(data);
@@ -128,12 +128,14 @@ public class ProdView implements Serializable {
 		nuovaman.setIditta(iditta);
 		nuovaman.setNumop(Integer.parseInt(numop));
 		nuovaman.setUrgenza(urgenza); //deve essere limitata a elevata media e bassa	
-		ds.newManutenzione(nuovaman);
+		boolean pippo=ds.newManutenzione(nuovaman);
+		if(pippo)
+			return destinazione;
 	}
 	/*
 	 * Aggiunto un else in modo da non mandare in vacca tutto se uno non mette un campo o non rispetta i valori sopra
 	 */
-	else return;
+	 return "errore.jsf";
  }
  
  public void insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed){
@@ -167,7 +169,7 @@ public class ProdView implements Serializable {
 	 return openman;
  }
  
- public Manutenzione Editman(String cods, String data){
+ public Manutenzione editman(String cods, String data){
 	 if(this.ds != null) {
 		 editman=ds.setEditman(cods, data);
 	 }

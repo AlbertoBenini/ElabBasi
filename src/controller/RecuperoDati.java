@@ -363,7 +363,7 @@ public class RecuperoDati implements Serializable {
 			} catch( SQLException sqle1 ) {
 				sqle1.printStackTrace();
 			}
-			res=true;
+			
 		}
 		
 		return res;
@@ -435,7 +435,7 @@ public class RecuperoDati implements Serializable {
 			//pstmt = con.prepareStatement(this.newMan);
 			//pstmt.clearParameters();
 			stmt = con.createStatement();
-			stmt.executeQuery(queryEditman);
+			rs=stmt.executeQuery(queryEditman);
 			if( rs.next() ) {
 				res = makeEditmanBean( rs );
 			}
