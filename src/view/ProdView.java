@@ -181,6 +181,7 @@ public class ProdView implements Serializable {
 	 if(this.editman==null) {
 		 this.editman = new Manutenzione();
 		 this.editman.setCods("");
+		 daTornare=this.editman;
 	 } else {
 		daTornare = this.editman;
 		this.editman = null;

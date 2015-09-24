@@ -26,7 +26,7 @@ public class RecuperoDati implements Serializable {
 	private String driver = "org.postgresql.Driver";
 
 	//query	
-	private String queryStrum = "SELECT s.cod, s.nome, d.nomed FROM strumento s FULL JOIN incarico d ON s.cod = d.cods";
+	private String queryStrum = " select s.nome, u.nomed, s.cod from utstr u RIGHT JOIN strumento s ON s.cod = u.cods AND '2015-03-06' BETWEEN u.datain and u.dataf";
 	private  String queryDettStrum = "SELECT * FROM strumento WHERE cod = '";
 	private String queryAllMan="SELECT * FROM Manutenzione"; //sovrascritta dopo è quella per ogni strumento
 	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
@@ -155,7 +155,7 @@ public class RecuperoDati implements Serializable {
 
 	public List<Manutenzione> getManutenzione(String cod) {
 
-		queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data DESC";
+		queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data ASC";
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -220,7 +220,7 @@ public class RecuperoDati implements Serializable {
 	}
 
 	public List<Utilizzo> getUtilizzi(String cod) {
-		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn DESC";
+		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn ASC";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
