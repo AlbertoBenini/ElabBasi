@@ -43,6 +43,8 @@
 	<h:outputLink value="carico.jsf">Inserisci un nuovo utilizzo</h:outputLink>
 	<br />
 	<h:outputLink value="manutenzione.jsf">Inserisci una nuova manutenzione</h:outputLink>
+	<br />
+	<h:outputLink value="manutenzaperte.jsf">Visualizza manutenzioni aperte</h:outputLink>
 	
 </h:body>
 </html>

@@ -28,8 +28,11 @@ public class ProdView implements Serializable {
   private List<Utilizzo> utilizzi;
   private Carico carico;
   private Manutenzione nuovaman;
+  private Manutenzione editman;
   private Utilizzo nuovoutil;
+  private List<Manutenzione> openman;
 
+  
   // === Methods ===============================================================
 
   public ProdView() {
@@ -40,6 +43,8 @@ public class ProdView implements Serializable {
     this.carico=null;
     this.nuovaman=null;
     this.nuovoutil=null;
+    this.openman=null;
+    this.editman=null;
   }
 
   @PostConstruct
@@ -83,9 +88,9 @@ public class ProdView implements Serializable {
 	 return utilizzi;
  }
  
- public Carico carico(){
+/* public Carico carico(){
 	 	 return carico;
- }
+ }*/
  
  public String sessione(String nome, String password,String destinazione) {
 	String url = "errore.jsf";
@@ -107,7 +112,7 @@ public class ProdView implements Serializable {
 	 * Inoltre altro piccolo appunto personale, le funzioni chiamate da JSF salvo nuove scoperte
 	 * Accettano come paramentro solo stringhe. Sembrerebbe.
 	 * 
-	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
+	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input. Bisogna fare anche i controlli sui vincoli integrità
 	 * 
 	 * 	RIGUARDO I CONTROLLI: le uniche cose che specifica nella consegna sono di limitare i valori di urgenza a quelli sotto, quindi come controlli potremmo anche essere già a posto
 	 * 
@@ -152,5 +157,19 @@ public class ProdView implements Serializable {
 		}
 		else return;
 	 }
+ 
+ public List<Manutenzione> openman(){
+	 if(this.ds != null) {
+		 openman=ds.getOpenman();
+	 }
+	 return openman;
+ }
+ 
+ public Manutenzione Editman(String cods, String data){
+	 if(this.ds != null) {
+		 editman=ds.setEditman(cods, data);
+	 }
+	 return editman;
+ }
  
 }

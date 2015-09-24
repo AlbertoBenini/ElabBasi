@@ -24,10 +24,11 @@ public class RecuperoDati implements Serializable {
 	//query	
 	private String queryStrum = "SELECT s.cod, s.nome, d.nomed FROM strumento s FULL JOIN incarico d ON s.cod = d.cods";
 	private  String queryDettStrum = "SELECT * FROM strumento WHERE cod = '";
-	private String queryAllMan="SELECT * FROM Manutenzione";
+	private String queryAllMan="SELECT * FROM Manutenzione"; //sovrascritta dopo è quella per ogni strumento
 	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
 	private String newMan="INSERT INTO manutenzione VALUES ( '?' , '?' , '?' ,? , '?' , '?' ,? )";
-
+	private String queryOpenman="SELECT * FROM Manutenzione"; //per visualizzare tutte le manutenzioni bisogna dirgli quelle aperte
+	private String queryEditman=null;
 	/*==========================costruttori====================================*/
 	public RecuperoDati() throws ClassNotFoundException {
 		Class.forName( driver );
@@ -80,14 +81,38 @@ public class RecuperoDati implements Serializable {
 		return bean;
 	}
 
-	private Carico makeCaricoBean() throws SQLException{
+/*	private Carico makeCaricoBean() throws SQLException{
 		Carico bean= new Carico();
 		bean.setTesto("Viva la focaccia");
 		return bean;
-	}
-	private Manutenzione makeManutenzioneBean(String risultato) throws SQLException{
+	}*/
+	/*private Manutenzione makeManutenzioneBean(String risultato) throws SQLException{
 		Manutenzione bean=new Manutenzione();
 		bean.setTesto(risultato);
+		return bean;
+	}*/
+	
+	private Manutenzione makeOpenmanBean( ResultSet rs ) throws SQLException {
+		Manutenzione bean = new Manutenzione();
+		bean.setCods(rs.getString( "cods"));
+		bean.setData(rs.getString( "data"));
+		bean.setDurata(rs.getString( "durata"));
+		bean.setNumop(rs.getInt( "numop"));
+		bean.setIditta(rs.getString( "iditta"));
+		bean.setUrgenza(rs.getString( "urgenza"));
+		bean.setCosto(rs.getFloat( "costo"));
+		return bean;
+	}
+	
+	private Manutenzione makeEditmanBean( ResultSet rs ) throws SQLException {
+		Manutenzione bean = new Manutenzione();
+		bean.setCods(rs.getString( "cods"));
+		bean.setData(rs.getString( "data"));
+		bean.setDurata(rs.getString( "durata"));
+		bean.setNumop(rs.getInt( "numop"));
+		bean.setIditta(rs.getString( "iditta"));
+		bean.setUrgenza(rs.getString( "urgenza"));
+		bean.setCosto(rs.getFloat( "costo"));
 		return bean;
 	}
 
@@ -253,6 +278,38 @@ public class RecuperoDati implements Serializable {
 		}
 		return result;
 	}
+	
+	public List<Manutenzione> getOpenman() {
+		// dichiarazione delle variabili
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Manutenzione> result = new ArrayList<Manutenzione>();
+
+		try {
+			// tentativo di connessione al database
+			con = DriverManager.getConnection( url, user, passwd );
+			// connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+			stmt = con.createStatement();
+			// eseguo l'interrogazione desiderata
+			rs = stmt.executeQuery( queryOpenman );
+			// memorizzo il risultato dell'interrogazione nel Vector
+			while( rs.next() ) {
+				result.add( makeOpenmanBean( rs ) );
+			}
+
+		} catch( SQLException sqle ) { // catturo le eventuali eccezioni!
+			sqle.printStackTrace();
+
+		} finally { // alla fine chiudo la connessione.
+			try {
+				con.close();
+			} catch( SQLException sqle1 ) {
+				sqle1.printStackTrace();
+			}
+		}
+		return result;
+	}
 	/*===RECUPERO DATI DA DATABASE FINE===*/
 
 	//query per inserire i dati nel database
@@ -356,4 +413,41 @@ public class RecuperoDati implements Serializable {
 		}
 		return res;
 	}
+	
+	public Manutenzione setEditman(String cods, String data)  {
+		// dichiarazione delle variabili
+		queryEditman="SELECT cods, data, durata, numop, iditta, urgenza, costo FROM Manutenzione WHERE CodS='"+cods+"' AND data='"+data+"'";
+		Connection con = null;
+		//PreparedStatement pstmt = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		Manutenzione res = new Manutenzione();
+		//String result=null;
+		try {
+			// tentativo di connessione al database
+			con = DriverManager.getConnection( url, user, passwd );
+			// connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
+			//pstmt = con.prepareStatement(this.newMan);
+			//pstmt.clearParameters();
+			stmt = con.createStatement();
+			stmt.executeQuery(queryEditman);
+			if( rs.next() ) {
+				res = makeEditmanBean( rs );
+			}
+		
+
+		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
+			sqle.printStackTrace();
+
+		} finally { // alla fine chiudo la connessione.
+			try {
+				con.close();
+			} catch( SQLException sqle1 ) {
+				sqle1.printStackTrace();
+			}
+		}
+		
+		return res;
+	}
+	
 }

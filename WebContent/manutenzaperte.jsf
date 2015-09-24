@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Manutenzioni aperte</title>
+</h:head>
+
+
+<h:body>
+	<h:form>
+		<h:dataTable value="#{dati.openman()}" var="u" border="1"
+			style="margin: 0px auto">
+			<h:column>
+				<f:facet name="header">Codice Strumento</f:facet>
+				<h:commandLink value="#{u.cods}" action="#{dati.editman( u.cods, u.data)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data </f:facet>
+					 #{u.data }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Durata</f:facet>
+		          #{u.durata}
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Numero operatori</f:facet>
+		          #{u.numop }
+		         </h:column>
+			<h:column>
+				<f:facet name="header">ID ditta</f:facet>
+		         #{u.iditta}
+		         </h:column>
+			<h:column>
+				<f:facet name="header">Urgenza</f:facet>
+		          #{u.urgenza}
+		       </h:column>
+			<h:column>
+				<f:facet name="header">Costo</f:facet>
+		          #{u.costo }  €
+		       </h:column>
+
+		</h:dataTable>
+	</h:form>
+
+	<h:outputLink value="index.jsf">Home Page</h:outputLink>
+</h:body>
+
+</html>
