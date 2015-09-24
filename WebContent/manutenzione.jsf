@@ -16,17 +16,17 @@
 <h:panelGrid column="1">
 		Codice Strumento: <h:inputText binding="#{cods}"  style="text-align:right" value="#{dati.getManCorrente().cods }" />
 		<br />
-		Data: <h:inputText binding="#{data}" style="text-align:right; "/>
+		Data: <h:inputText binding="#{data}" style="text-align:right" value="#{dati.getManCorrente().data }"/>
 		<br />
-		Durata: <h:inputText binding="#{durata}" style="text-align:right;"/>
+		Durata: <h:inputText binding="#{durata}" style="text-align:right" value="#{dati.getManCorrente().durata }"/>
 		<br />
-		Numero operatori: <h:inputText binding="#{numop}" style="text-align:right;"/>
+		Numero operatori: <h:inputText binding="#{numop}" style="text-align:right" value="#{dati.getManCorrente().snumop }"/>
 		<br />
-		ID ditta: <h:inputText binding="#{iditta}" style="text-align:right;"/>
+		ID ditta: <h:inputText binding="#{iditta}" style="text-align:right" value="#{dati.getManCorrente().iditta }"/>
 		<br />
-		Urgenza: <h:inputText binding="#{urgenza}" style="text-align:right;"/>
+		Urgenza: <h:inputText binding="#{urgenza}" style="text-align:right" value="#{dati.getManCorrente().urgenza }"/>
 		<br />
-		Costo: <h:inputText binding="#{costo}" style="text-align:right;"/>
+		Costo: <h:inputText binding="#{costo}" style="text-align:right" value="#{dati.getManCorrente().scosto }"/>
 		<br />
 		<br />
 		

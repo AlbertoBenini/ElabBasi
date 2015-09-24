@@ -222,7 +222,7 @@ public class RecuperoDati implements Serializable {
 	public List<Utilizzo> getUtilizzi(String cod) {
 		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn ASC";
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		//PreparedStatement pstmt = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		List<Utilizzo> result = new ArrayList<Utilizzo>();

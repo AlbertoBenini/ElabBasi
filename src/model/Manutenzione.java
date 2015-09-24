@@ -64,6 +64,10 @@ public class Manutenzione implements Serializable{
 		return this.numop;
 	}
 	
+	public String getSnumop() {
+		return ""+this.numop;
+	}
+	
 	public void setIditta(String iditta) {
 		this.iditta = iditta;
 	}
@@ -86,6 +90,10 @@ public class Manutenzione implements Serializable{
 	
 	public float getcosto() {
 		return this.costo;
+	}
+	
+	public String getscosto() {
+		return ""+this.costo;
 	}
 	
 	
