@@ -169,11 +169,23 @@ public class ProdView implements Serializable {
 	 return openman;
  }
  
- public Manutenzione editman(String cods, String data){
+ public String editman(String cods, String data){
 	 if(this.ds != null) {
 		 editman=ds.setEditman(cods, data);
 	 }
-	 return editman;
+	 return "manutenzione.jsf";
+ }
+ 
+ public Manutenzione getManCorrente() {
+	 Manutenzione daTornare = null;
+	 if(this.editman==null) {
+		 this.editman = new Manutenzione();
+		 this.editman.setCods("");
+	 } else {
+		daTornare = this.editman;
+		this.editman = null;
+	 }
+	 return daTornare;
  }
  
 }
