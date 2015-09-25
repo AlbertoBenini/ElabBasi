@@ -33,7 +33,6 @@ public class ProdView implements Serializable {
   private Manutenzione editman;
   private Utilizzo nuovoutil;
   private List<Manutenzione> openman;
-  
 
   
   // === Methods ===============================================================
@@ -108,19 +107,31 @@ public class ProdView implements Serializable {
  
  public String insman( String cods, String data, String durata, String numop, String iditta, String urgenza, String costo, String destinazione){
 	this.nuovaman = new Manutenzione();
-	/*
-	 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
-	 * purtroppo gli oggetti tendono a dover essere inizializzati per poter essere usati.
-	 * Vedi riga superiore al commento.
-	 * Inoltre altro piccolo appunto personale, le funzioni chiamate da JSF salvo nuove scoperte
-	 * Accettano come paramentro solo stringhe. Sembrerebbe.
-	 * 
+	/* 
 	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input. Bisogna fare anche i controlli sui vincoli integrità
 	 * 
 	 * 	RIGUARDO I CONTROLLI: le uniche cose che specifica nella consegna sono di limitare i valori di urgenza a quelli sotto, quindi come controlli potremmo anche essere già a posto
 	 * 
 	 * C'est la vie. Per fare il melodrammatico. 
 	 */
+	
+	/*Se una manutenzione è da inserire per la prima volta, this.editman.cods = "".
+	 * Se this.editman.cods != ""
+	 * Vuol dire che siamo in un update.
+	 * this.editman.codice contiene il codice precedentemente inserito.
+	 * Se è così ->
+	 */
+	if(this.editman==null) {
+		ripCambiaMan();
+	}
+	if(this.editman.getCods().compareTo("")!=0) {
+		System.out.println("Qui entro");
+		if((cods.compareTo(this.editman.getCods())!=0) /*|| (data.compareTo(this.editman.getData())!=0)*/) {
+			System.out.println("Qui entro number 2");
+			return "erroreInserimento.jsf";
+		}
+	}
+	
 	if(!(cods==null || data==null || durata==null || numop==null || iditta==null || urgenza==null || costo==null)&&(urgenza.compareTo("bassa")==0|| urgenza.compareTo("media")==0|| urgenza.compareTo("elevata")==0)) {
 		nuovaman.setCods(cods);
 		nuovaman.setCosto(Float.parseFloat(costo));
@@ -141,13 +152,7 @@ public class ProdView implements Serializable {
  
  public String insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed, String destinazione){
 		this.nuovoutil = new Utilizzo();
-		/*
-		 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
-		 * purtroppo gli oggetti tendono a dover essere inizializzati per poter essere usati.
-		 * Vedi riga superiore al commento.
-		 * Inoltre altro piccolo appunto personale, le funzioni chiamate da JSF salvo nuove scoperte
-		 * Accettano come paramentro solo stringhe. Sembrerebbe.
-		 * 
+		/* 
 		 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
 		 * C'est la vie. Per fare il melodrammatico. 
 		 */
@@ -196,19 +201,26 @@ public class ProdView implements Serializable {
 		daTornare = this.editman;
 		//this.editman = null;
 		
-		/*
-		 * TODO:
-		 * Mi è venuto in mente un modo per risolvere la questione Manutenzione
-		 * che rimangono i dati dentro... Semplicemente quanto chiamiamo la pagina,
-		 * se viene chiamata dal link settiamo l'oggetto vuoto, mentre
-		 * se viene chiamata dalla pagina sessioni aperte riempiamo l'oggetto.
-		 * Direi che è molto più semplice. Poi dobbiamo fare due parole sulla sessione...
-		 * Cioè come facciamo a vedere se l'utente è loggato o no e quindi permettere l'inserimento?
-		 * 
-		 */
-		
 	 }
 	 return daTornare;
+ }
+ 
+ public String ripCambiaMan() {
+	 String daTornare = "manutenzione.jsf";
+	 this.editman = new Manutenzione();
+	 this.editman.setCods("");
+	 this.editman.setData("");
+	 this.editman.setCosto(0);
+	 this.editman.setDurata("");
+	 this.editman.setIditta("");
+	 this.editman.setNumop(0);
+	 this.editman.setTesto("");
+	 this.editman.setUrgenza("");
+	 return daTornare;
+ }
+ 
+ public String isNew() {
+	 return "".equals(this.editman.getCods())?"false":"true";
  }
  
 }
