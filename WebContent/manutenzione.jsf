@@ -20,13 +20,13 @@
 		<br />
 		Durata: <h:inputText binding="#{durata}" style="text-align:right" value="#{dati.getManCorrente().durata }"/>
 		<br />
-		Numero operatori: <h:inputText binding="#{numop}" style="text-align:right" value="#{dati.getManCorrente().snumop }"/>
+		Numero operatori: <h:inputText binding="#{numop}" style="text-align:right" value="#{dati.getManCorrente().numop }"/>
 		<br />
 		ID ditta: <h:inputText binding="#{iditta}" style="text-align:right" value="#{dati.getManCorrente().iditta }"/>
 		<br />
 		Urgenza: <h:inputText binding="#{urgenza}" style="text-align:right" value="#{dati.getManCorrente().urgenza }"/>
 		<br />
-		Costo: <h:inputText binding="#{costo}" style="text-align:right" value="#{dati.getManCorrente().scosto }"/>
+		Costo: <h:inputText binding="#{costo}" style="text-align:right" value="#{dati.getManCorrente().costo }"/>
 		<br />
 		<br />
 		

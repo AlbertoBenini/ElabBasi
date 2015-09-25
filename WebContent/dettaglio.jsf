@@ -11,17 +11,17 @@
 
 <h:body>
 	<h:form>
-		<h1>#{dati.pollo.nome}</h1>
-		<h3>Codice: #{dati.pollo.cod }</h3>
-		<h3>Potenza: #{dati.pollo.watt } Watt</h3>
-		<h3>Ditta produttrice: #{dati.pollo.ditta }</h3>
-		<h3>Modello: #{dati.pollo.modello }</h3>
-		<h3>Costo: #{dati.pollo.costo } €</h3>
-		<h3>Anno acquisto: #{dati.pollo.annoaq }</h3>
+		<h1>#{dati.strumsel.nome}</h1>
+		<h3>Codice: #{dati.strumsel.cod }</h3>
+		<h3>Potenza: #{dati.strumsel.watt } Watt</h3>
+		<h3>Ditta produttrice: #{dati.strumsel.ditta }</h3>
+		<h3>Modello: #{dati.strumsel.modello }</h3>
+		<h3>Costo: #{dati.strumsel.costo } €</h3>
+		<h3>Anno acquisto: #{dati.strumsel.annoaq }</h3>
 	</h:form>
 	<h:form>
 	<h2>Utilizzi</h2>
-		<h:dataTable value="#{dati.utilizzi(dati.pollo.cod)}" var="c"
+		<h:dataTable value="#{dati.utilizzi(dati.strumsel.cod)}" var="c"
 			border="1" style="margin: 0px auto">
 			<h:column>
 				<f:facet name="header">Data Inizio</f:facet>
@@ -49,7 +49,7 @@
 	</h:form>
 	<h:form>
 	<h2>Manutenzioni </h2>
-		<h:dataTable value="#{dati.manutenzione(dati.pollo.cod)}" var="u"
+		<h:dataTable value="#{dati.manutenzione(dati.strumsel.cod)}" var="u"
 			border="1" style="margin: 0px auto">
 			<h:column>
 				<f:facet name="header">Data </f:facet>

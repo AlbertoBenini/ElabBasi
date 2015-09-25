@@ -25,7 +25,7 @@ public class ProdView implements Serializable {
 
   private RecuperoDati ds;
   private List<Strumento> strumenti;
-  private StrSel pollo;
+  private StrSel strumsel;
   private List<Manutenzione> manutenzione;  
   private List<Utilizzo> utilizzi;
   private Carico carico;
@@ -40,7 +40,7 @@ public class ProdView implements Serializable {
 
   public ProdView() {
     this.strumenti = null;
-    this.pollo = null;
+    this.strumsel = null;
     this.manutenzione=null;
     this.utilizzi=null;
     this.carico=null;
@@ -68,13 +68,13 @@ public class ProdView implements Serializable {
   
   public String dettaglio(String codice) {
     if( this.ds != null ){
-      pollo = ds.getStrumSel(codice);
+      strumsel = ds.getStrumSel(codice);
       }
     return "dettaglio";
   }
   
-  public StrSel getPollo() {
-    	return pollo;
+  public StrSel getStrumsel() {
+    	return strumsel;
   }
  
   public List<Manutenzione> manutenzione(String cod){
@@ -129,17 +129,17 @@ public class ProdView implements Serializable {
 		nuovaman.setIditta(iditta);
 		nuovaman.setNumop(Integer.parseInt(numop));
 		nuovaman.setUrgenza(urgenza); //deve essere limitata a elevata media e bassa	
-		boolean pippo=ds.newManutenzione(nuovaman);
-		if(pippo)
+		boolean ok=ds.newManutenzione(nuovaman);
+		if(ok)
 			return destinazione;
 	}
 	/*
 	 * Aggiunto un else in modo da non mandare in vacca tutto se uno non mette un campo o non rispetta i valori sopra
 	 */
-	 return "errore.jsf";
+	 return "erroreInserimento.jsf";
  }
  
- public void insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed){
+ public String insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed, String destinazione){
 		this.nuovoutil = new Utilizzo();
 		/*
 		 * To albi: La cosa che ti ha fatto perdere un pomeriggio e a me una serata è che 
@@ -158,9 +158,11 @@ public class ProdView implements Serializable {
 			nuovoutil.setMotivo(motivo);
 			nuovoutil.setNomed(nomed);
 			nuovoutil.setResp(resp);
-			ds.newUtilizzo(nuovoutil);
+			boolean ok=ds.newUtilizzo(nuovoutil);
+			if(ok)
+				return destinazione;
 		}
-		else return;
+		return "erroreInserimento.jsf";
 	 }
  
  public List<Manutenzione> openman(){

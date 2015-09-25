@@ -31,8 +31,9 @@ public class RecuperoDati implements Serializable {
 	private String queryAllMan="SELECT * FROM Manutenzione"; //sovrascritta dopo è quella per ogni strumento
 	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
 	private String newMan="INSERT INTO manutenzione VALUES ( '?' , '?' , '?' ,? , '?' , '?' ,? )";
-	private String queryOpenman="SELECT * FROM Manutenzione"; //per visualizzare tutte le manutenzioni bisogna dirgli quelle aperte
+	private String queryOpenman="SELECT * FROM Manutenzione ORDER BY cods"; //per visualizzare tutte le manutenzioni bisogna dirgli quelle aperte
 	private String queryEditman=null;
+	private boolean modify=false;
 	/*==========================costruttori====================================*/
 	public RecuperoDati() throws ClassNotFoundException {
 		Class.forName( driver );
@@ -155,7 +156,7 @@ public class RecuperoDati implements Serializable {
 
 	public List<Manutenzione> getManutenzione(String cod) {
 
-		queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data ASC";
+		queryAllMan="SELECT * FROM Manutenzione WHERE cods='"+cod+"' ORDER BY data DESC";
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -220,7 +221,7 @@ public class RecuperoDati implements Serializable {
 	}
 
 	public List<Utilizzo> getUtilizzi(String cod) {
-		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn ASC";
+		queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U WHERE U.CodS='"+cod+"' ORDER BY U.DataIn DESC";
 		Connection con = null;
 		//PreparedStatement pstmt = null;
 		Statement stmt = null;
@@ -299,7 +300,7 @@ public class RecuperoDati implements Serializable {
 			rs = stmt.executeQuery( queryOpenman );
 			// memorizzo il risultato dell'interrogazione nel Vector
 			while( rs.next() ) {
-				result.add( makeOpenmanBean( rs ) );
+				result.add(makeOpenmanBean(rs));
 			}
 
 		} catch( SQLException sqle ) { // catturo le eventuali eccezioni!
@@ -324,8 +325,13 @@ public class RecuperoDati implements Serializable {
 		Statement stmt = null;
 		ResultSet rs = null;
 		boolean res = false;
-		//String result=null;
-		String query="INSERT INTO manutenzione Values ('"+nuovaman.getCods()+"',"+"'"+nuovaman.getData()+"',"+"'"+nuovaman.getDurata()+"',"+"'"+nuovaman.getNumop()+"',"+"'"+nuovaman.getIditta()+"',"+"'"+nuovaman.getUrgenza()+"',"+"'"+nuovaman.getcosto()+"')";
+		String query="";
+		//SE INSERIAMO UNA NUOVA MANUTENZIONE LA QUERY è GIUSTA, MA SE NE MODIFICHIAMO UNA DOBBIAMO FAR SI CHE ESEGUA UNA QUERY DEL TIPO UPDATE tabella SET pippo=pluto... WHERE cond
+		if(modify==true)
+			query="UPDATE manutenzione SET cods='"+nuovaman.getCods()+"',data='"+nuovaman.getData()+"',durata='"+nuovaman.getDurata()+"',numop='"+nuovaman.getNumop()+"',iditta='"+nuovaman.getIditta()+"',urgenza='"+nuovaman.getUrgenza()+"',costo='"+nuovaman.getcosto()+"' WHERE cods='"+nuovaman.getCods()+"' AND data='"+nuovaman.getData()+"'";
+		else 
+			query="INSERT INTO manutenzione Values ('"+nuovaman.getCods()+"',"+"'"+nuovaman.getData()+"',"+"'"+nuovaman.getDurata()+"',"+"'"+nuovaman.getNumop()+"',"+"'"+nuovaman.getIditta()+"',"+"'"+nuovaman.getUrgenza()+"',"+"'"+nuovaman.getcosto()+"')";
+		
 		try {
 			// tentativo di connessione al database
 			con = DriverManager.getConnection( url, user, passwd );
@@ -335,24 +341,7 @@ public class RecuperoDati implements Serializable {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
 			res=true;
-			// eseguo l'interrogazione desiderata
-			/*rs = stmt.executeQuery( query );
-			// memorizzo il risultato dell'interrogazione nel Vector
-			if( rs.next() ) {
-				result = makeManutenzioneBean( rs );
-			}*/
 			
-			
-			/*pstmt.setString(1, nuovaman.getCods());
-			pstmt.setString(2, nuovaman.getData());
-			pstmt.setString(3, nuovaman.getDurata());
-			pstmt.setInt(4, nuovaman.getNumop());
-			pstmt.setString(5, nuovaman.getIditta());
-			pstmt.setString(6, nuovaman.getUrgenza());
-			pstmt.setFloat(7, nuovaman.getcosto());*/
-
-			// eseguo la query
-			//pstmt.executeUpdate();
 
 		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
 			sqle.printStackTrace();
@@ -365,7 +354,7 @@ public class RecuperoDati implements Serializable {
 			}
 			
 		}
-		
+		modify=false;
 		return res;
 	}
 	
@@ -387,24 +376,7 @@ public class RecuperoDati implements Serializable {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);  //con update non genera l'eccezzione del dover ritornare qualcosa
 			res=true;
-			// eseguo l'interrogazione desiderata
-			/*rs = stmt.executeQuery( query );
-			// memorizzo il risultato dell'interrogazione nel Vector
-			if( rs.next() ) {
-				result = makeManutenzioneBean( rs );
-			}*/
-			
-			
-			/*pstmt.setString(1, nuovaman.getCods());
-			pstmt.setString(2, nuovaman.getData());
-			pstmt.setString(3, nuovaman.getDurata());
-			pstmt.setInt(4, nuovaman.getNumop());
-			pstmt.setString(5, nuovaman.getIditta());
-			pstmt.setString(6, nuovaman.getUrgenza());
-			pstmt.setFloat(7, nuovaman.getcosto());*/
-
-			// eseguo la query
-			//pstmt.executeUpdate();
+	
 
 		} catch( SQLException sqle ) { // Catturo le eventuali eccezioni
 			sqle.printStackTrace();
@@ -451,7 +423,7 @@ public class RecuperoDati implements Serializable {
 				sqle1.printStackTrace();
 			}
 		}
-		
+		modify=true;
 		return res;
 	}
 	

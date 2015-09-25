@@ -34,7 +34,7 @@
 		</h:panelGrid>
 		<!-- action da sistemare  -->
 		<h:commandButton
-			action="#{dati.insutil(cods.value,datain.value,dataf.value, motivo.value, resp.value, nomed.value)}"
+			action="#{dati.insutil(cods.value,datain.value,dataf.value, motivo.value, resp.value, nomed.value, 'okInserimento.jsf')}"
 			value="Registra Utilizzo" />
 	</h:form>
 	<br />

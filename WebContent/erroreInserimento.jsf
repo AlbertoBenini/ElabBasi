@@ -5,17 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Inserimento effettuato</title>
+	<title>Errore inserimento</title>
 </h:head>
 <h:body>
 
-	<h1>Inserimento effettuato con successo!</h1>
+	<h1>Inserimento non effettuato, inserire i dati correttamente</h1>
 
 	<ul>
 		<li><h:outputLink value="index.jsf">Home Page</h:outputLink></li>
 		<li><h:outputLink value="manutenzione.jsf">Inserisci una nuova manutenzione</h:outputLink></li>
 		<li><h:outputLink value="carico.jsf">Inserisci un nuovo utilizzo</h:outputLink></li>
 		<li><h:outputLink value="manutenzaperte.jsf">Visualizza manutenzioni aperte</h:outputLink></li>
+
 	</ul>
 
 
