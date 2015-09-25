@@ -10,7 +10,7 @@
 
 
 <h:body>
-	<h1>Form di accesso:</h1>
+	<h2>Form di accesso:</h2>
 	<h:form>
 		Username: <h:inputText binding="#{username}" />
 		Password: <h:inputText binding="#{password}" /> <br />
