@@ -133,9 +133,7 @@ public class ProdView implements Serializable {
 		ripCambiaMan();
 	}
 	if(this.editman.getCods().compareTo("")!=0) {
-		System.out.println("Qui entro");
 		if((cods.compareTo(this.editman.getCods())!=0) /*|| (data.compareTo(this.editman.getData())!=0)*/) {
-			System.out.println("Qui entro number 2");
 			return "erroreInserimento.jsf";
 		}
 	}
