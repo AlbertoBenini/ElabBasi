@@ -5,8 +5,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<!-- JSF DA ELIMINARE? -->
-
 <h:head>
 	<title>Manutenzioni aperte</title>
 </h:head>

@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import model.Manutenzione;
@@ -26,12 +28,13 @@ public class RecuperoDati implements Serializable {
 	private String driver = "org.postgresql.Driver";
 
 	//query	
-	private String queryStrum = " select s.nome, u.nomed, s.cod from utstr u RIGHT JOIN strumento s ON s.cod = u.cods AND '2015-03-06' BETWEEN u.datain and u.dataf";
+	private String dc = ottieniData();
+	private String queryStrum = " select s.nome, u.nomed, s.cod from utstr u RIGHT JOIN strumento s ON s.cod = u.cods AND '"+dc+"' BETWEEN u.datain and u.dataf";
 	private  String queryDettStrum = "SELECT * FROM strumento WHERE cod = '";
 	private String queryAllMan="SELECT * FROM Manutenzione"; //sovrascritta dopo è quella per ogni strumento
 	private String queryUtilCrono="SELECT U.DataIn, U.DataF, U.motivo, U.NomeD, U.resp FROM UtStr U, Strumento S WHERE U.CodS=S.Cod ORDER BY U.DataIn DESC";
 	private String newMan="INSERT INTO manutenzione VALUES ( '?' , '?' , '?' ,? , '?' , '?' ,? )";
-	private String queryOpenman="SELECT * FROM Manutenzione ORDER BY cods"; //per visualizzare tutte le manutenzioni bisogna dirgli quelle aperte
+	private String queryOpenman="SELECT * FROM Manutenzione WHERE data > '" +dc+"' ORDER BY cods"; //per visualizzare tutte le manutenzioni bisogna dirgli quelle aperte
 	private String queryEditman=null;
 	private boolean modify=false;
 	/*==========================costruttori====================================*/
@@ -425,6 +428,17 @@ public class RecuperoDati implements Serializable {
 		}
 		modify=true;
 		return res;
+	}
+	
+	/*===========Metodi Privati=======================*/
+	private String ottieniData() {
+		GregorianCalendar gc = new GregorianCalendar();
+		String[] gma = new String[3];
+		gma[0] = ""+gc.get(Calendar.DAY_OF_MONTH);
+		gma[1] = ""+(gc.get(Calendar.MONTH)+1);
+		gma[2] = ""+gc.get(Calendar.YEAR);
+		String daTornare = gma[2]+"-"+gma[1]+"-"+gma[0];
+		return daTornare;
 	}
 	
 }

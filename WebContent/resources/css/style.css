@@ -1,0 +1,12 @@
+.bottone {
+	background-color:cornflowerblue;
+	border-radius: 1em;
+	margin: 0.5em;
+	padding: 0.5em;
+	font-size: 0.7em;
+}
+
+.bottone:hover {
+	background-color:white;
+	color:black;
+}
