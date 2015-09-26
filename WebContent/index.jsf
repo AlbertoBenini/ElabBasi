@@ -11,36 +11,48 @@
 
 
 <h:body>
-	<h2>Form di accesso:</h2>
-	<h:form>
-		Username: <h:inputText binding="#{username}" />
-		Password: <h:inputSecret binding="#{password}" /> <br />
+	<div id="corpo">
+		<h1>Elaborato G40 - Benini, Piccoli</h1>
 		<br />
-		<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'carico.jsf')}" value="Login e registra utilizzo"/>
-		<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'manutenzione.jsf')}" value="Login e registra manutenzione" />
-		<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'manutenzaperte.jsf')}" value="Login e visualizza manutenzioni aperte" /> 
 		<br />
-	</h:form>
-
-	<h1>Strumenti in uso</h1>
-	<br />
-	<br />
-	<h:form>
-		<h:dataTable value="#{dati.strumenti}" var="c" border="1"
-			style="margin: 0px auto">
-			<h:column>
-				<f:facet name="header">Nome Strumento</f:facet>
-				<h:commandLink value="#{c.nome}" action="#{dati.dettaglio( c.cod )}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">In Uso</f:facet>
-        #{c.nomed}
-      </h:column>
-			<h:column>
-				<f:facet name="header">Codice</f:facet>
-        #{c.cod}
-      </h:column>
-		</h:dataTable>
-	</h:form>
+		<div id="sinistra">
+			
+			<h:form>
+				<div id="campiIns">
+				<h2>Login</h2>
+				Username: <h:inputText styleClass="campoTesto" binding="#{username}" /> <br />
+				Password: <h:inputSecret styleClass="campoTesto" binding="#{password}" /> <br />
+				</div>
+				<br />
+				<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'carico.jsf')}" value="Login e registra utilizzo"/>
+				<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'manutenzione.jsf')}" value="Login e registra manutenzione" />
+				<h:commandButton styleClass="bottone" action="#{dati.sessione(username.value,password.value,'manutenzaperte.jsf')}" value="Login e visualizza manutenzioni aperte" /> 
+				<br />
+			</h:form>
+		</div>
+		<div id="destra">
+			<h2>Strumenti in uso</h2>
+			<br />
+			<br />
+			<h:form>
+				<h:dataTable value="#{dati.strumenti}" var="c" border="1"
+					style="margin: 0px auto">
+					<h:column>
+						<f:facet name="header">Nome Strumento</f:facet>
+						<h:commandLink value="#{c.nome}" action="#{dati.dettaglio( c.cod )}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">In Uso</f:facet>
+		        #{c.nomed}
+		      </h:column>
+					<h:column>
+						<f:facet name="header">Codice</f:facet>
+		        #{c.cod}
+		      </h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+		<div id="fine"></div>
+	</div>
 </h:body>
 </html>
