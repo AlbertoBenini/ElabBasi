@@ -96,10 +96,18 @@ public class ProdView implements Serializable {
  
  public String sessione(String nome, String password,String destinazione) {
 	String url = "errore.jsf";
+	//Se l'utente non esiste nel database o la password non è corretta, String utente = null
 	String utente = ds.getUtente(nome,password);
 	Sessione sessione = Sessione.getInstance();
+	//Il booleano mi avverte se l'utente è null o no, se è null la sessione 
+	//non viene inserita.
 	boolean esiste = sessione.setSessione(utente, password);
+	//Se l'utente esiste nel database e la password è corretta, esiste = true
 	if(esiste) {
+		if(destinazione.compareTo("manutenzione.jsf")==0) {
+			//Setto a zero i campi del form manutenzione per un nuovo inserimento
+			this.ripCambiaMan();
+		}
 		return destinazione;
 	}	
 	return url;

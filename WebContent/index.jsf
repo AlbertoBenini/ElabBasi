@@ -15,7 +15,8 @@
 		Username: <h:inputText binding="#{username}" />
 		Password: <h:inputText binding="#{password}" /> <br />
 		<h:commandButton action="#{dati.sessione(username.value,password.value,'carico.jsf')}" value="Login e registra utilizzo"/>
-		<h:commandButton action="#{dati.sessione(username.value,password.value,'manutenzione.jsf')}" value="Login e registra manutenzione" /> 
+		<h:commandButton action="#{dati.sessione(username.value,password.value,'manutenzione.jsf')}" value="Login e registra manutenzione" />
+		<h:commandButton action="#{dati.sessione(username.value,password.value,'manutenzaperte.jsf')}" value="Login e visualizza manutenzioni aperte" /> 
 		<br />
 	</h:form>
 
@@ -40,11 +41,12 @@
 		</h:dataTable>
 	</h:form>
 	
+	<!--  
 	<h:outputLink value="carico.jsf">Inserisci un nuovo utilizzo</h:outputLink>
 	<br />
 	<h:outputLink value="#{dati.ripCambiaMan()}">Inserisci una nuova manutenzione</h:outputLink>
 	<br />
 	<h:outputLink value="manutenzaperte.jsf">Visualizza manutenzioni aperte</h:outputLink>
-	
+	-->
 </h:body>
 </html>

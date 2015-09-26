@@ -10,7 +10,7 @@
 
 
 <h:body>
-	<h1>Errore non sei autorizzato all'accesso. controlla username e password</h1>
+	<h1>Errore non sei autorizzato all'accesso. Controlla username e password</h1>
 	<h:outputLink value="index.jsf">Torna alla pagina iniziale</h:outputLink>
 	
 </h:body>
