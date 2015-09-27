@@ -6,80 +6,90 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Dettaglio strumento</title>
+	<h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
 
 <h:body>
-	<h:form>
-		<h1>#{dati.strumsel.nome}</h1>
-		<h3>Codice: #{dati.strumsel.cod }</h3>
-		<h3>Potenza: #{dati.strumsel.watt } Watt</h3>
-		<h3>Ditta produttrice: #{dati.strumsel.ditta }</h3>
-		<h3>Modello: #{dati.strumsel.modello }</h3>
-		<h3>Costo: #{dati.strumsel.costo } €</h3>
-		<h3>Anno acquisto: #{dati.strumsel.annoaq }</h3>
-	</h:form>
-	<h:form>
-	<h2>Utilizzi</h2>
-		<h:dataTable value="#{dati.utilizzi(dati.strumsel.cod)}" var="c"
-			border="1" style="margin: 0px auto">
-			<h:column>
-				<f:facet name="header">Data Inizio</f:facet>
-		          #{c.datain }
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Data Fine</f:facet>
-		          #{c.dataf }
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Motivo</f:facet>
-		        #{c.motivo }
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Responsabile</f:facet>
-		         #{c.resp}
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Dipartimento</f:facet>
-		         #{c.nomed }
-		       </h:column>
-		</h:dataTable>
+	<div id="sinistra">
+		<div id="strumento">
+			<h:form>
+					<h1>#{dati.strumsel.nome}</h1>
+					<h3>Codice: #{dati.strumsel.cod }</h3>
+					<h3>Potenza: #{dati.strumsel.watt } Watt</h3>
+					<h3>Ditta produttrice: #{dati.strumsel.ditta }</h3>
+					<h3>Modello: #{dati.strumsel.modello }</h3>
+					<h3>Costo: #{dati.strumsel.costo } €</h3>
+					<h3>Anno acquisto: #{dati.strumsel.annoaq }</h3>
+			</h:form>
+		</div>
 		<br />
-		<br />
-	</h:form>
-	<h:form>
-	<h2>Manutenzioni </h2>
-		<h:dataTable value="#{dati.manutenzione(dati.strumsel.cod)}" var="u"
-			border="1" style="margin: 0px auto">
-			<h:column>
-				<f:facet name="header">Data </f:facet>
-		        #{u.data }
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Durata</f:facet>
-		          #{u.durata}
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Numero operatori</f:facet>
-		          #{u.numop }
-		         </h:column>
-			<h:column>
-				<f:facet name="header">ID ditta</f:facet>
-		         #{u.iditta}
-		         </h:column>
-			<h:column>
-				<f:facet name="header">Urgenza</f:facet>
-		          #{u.urgenza}
-		       </h:column>
-			<h:column>
-				<f:facet name="header">Costo</f:facet>
-		          #{u.costo }  €
-		       </h:column>
-
-		</h:dataTable>
-	</h:form>
-	<h:outputLink value="index.jsf">Pagina iniziale</h:outputLink>
-
+		<h:form>
+		<h:commandButton styleClass="bottone" action="index.jsf" value="Torna alla pagina iniziale"/>
+		</h:form>
+	</div>
+	<div id="destra">
+		<h:form>
+			<h2>Utilizzi</h2>
+				<h:dataTable value="#{dati.utilizzi(dati.strumsel.cod)}" var="c">
+					<h:column>
+						<f:facet name="header">Data Inizio</f:facet>
+				          #{c.datain }
+				         </h:column>
+					<h:column>
+						<f:facet name="header">Data Fine</f:facet>
+				          #{c.dataf }
+				         </h:column>
+					<h:column>
+						<f:facet name="header">Motivo</f:facet>
+				        #{c.motivo }
+				         </h:column>
+					<h:column>
+						<f:facet name="header">Responsabile</f:facet>
+				         #{c.resp}
+				         </h:column>
+					<h:column>
+						<f:facet name="header">Dipartimento</f:facet>
+				         #{c.nomed }
+				       </h:column>
+				</h:dataTable>
+				<br />
+				<br />
+		</h:form>
+		<h:form>
+		<h2>Manutenzioni </h2>
+			<h:dataTable value="#{dati.manutenzione(dati.strumsel.cod)}" var="u">
+				<h:column>
+					<f:facet name="header">Data </f:facet>
+			        #{u.data }
+			         </h:column>
+				<h:column>
+					<f:facet name="header">Durata</f:facet>
+			          #{u.durata}
+			         </h:column>
+				<h:column>
+					<f:facet name="header">Numero operatori</f:facet>
+			          #{u.numop }
+			         </h:column>
+				<h:column>
+					<f:facet name="header">ID ditta</f:facet>
+			         #{u.iditta}
+			         </h:column>
+				<h:column>
+					<f:facet name="header">Urgenza</f:facet>
+			          #{u.urgenza}
+			       </h:column>
+				<h:column>
+					<f:facet name="header">Costo</f:facet>
+			          #{u.costo }  €
+			       </h:column>
+	
+			</h:dataTable>
+		</h:form>
+	</div>
+	<div id="fine"></div>
+		
+		<!-- <h:outputLink value="index.jsf">Pagina iniziale</h:outputLink>  -->
 
 </h:body>
 </html>

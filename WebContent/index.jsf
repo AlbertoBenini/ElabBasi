@@ -16,7 +16,6 @@
 		<br />
 		<br />
 		<div id="sinistra">
-			
 			<h:form>
 				<div id="campiIns">
 				<h2>Login</h2>
@@ -35,8 +34,7 @@
 			<br />
 			<br />
 			<h:form>
-				<h:dataTable value="#{dati.strumenti}" var="c" border="1"
-					style="margin: 0px auto">
+				<h:dataTable value="#{dati.strumenti}" var="c">
 					<h:column>
 						<f:facet name="header">Nome Strumento</f:facet>
 						<h:commandLink value="#{c.nome}" action="#{dati.dettaglio( c.cod )}" />

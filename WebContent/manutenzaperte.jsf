@@ -7,15 +7,17 @@
 
 <h:head>
 	<title>Manutenzioni aperte</title>
+	<h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
 
 <h:body>
 	<h:form>
-	<h2>Manutenzioni aperte:</h2>
+	<div id="centraTesto">
+		<h2>Manutenzioni aperte:</h2>
+	</div>
 	<br/>
-		<h:dataTable value="#{dati.openman()}" var="u" border="1"
-			style="margin: 0px auto">
+		<h:dataTable value="#{dati.openman()}" var="u">
 			<h:column>
 				<f:facet name="header">Codice Strumento</f:facet>
 				<h:commandLink value="#{u.cods}" action="#{dati.editman(u.cods,u.data)}"  />
@@ -46,9 +48,10 @@
 		       </h:column>
 
 		</h:dataTable>
+		<br />
+		<h:commandButton styleClass="bottone" action="index.jsf" value="Torna alla pagina iniziale"/>
 	</h:form>
-
-	<h:outputLink value="index.jsf">Home Page</h:outputLink>
+	<!--  <h:outputLink value="index.jsf">Home Page</h:outputLink>  -->
 </h:body>
 
 </html>

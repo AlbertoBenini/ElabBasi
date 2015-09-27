@@ -1,6 +1,34 @@
+/*===========GENERALI=============*/
+
 body {
 	font-family: Verdana,sans-serif;
 }
+
+a {
+	text-decoration: none;
+
+}
+
+a:hover {
+	font-style: italic;
+}
+
+table {
+	margin: 0px auto;
+}
+
+table td {
+	text-align:left;
+	border: 1px solid #9cbbf3;
+	padding: 0.5em;
+}
+
+table th {
+	padding: 0.5em;
+	background-color:#9cbbf3;
+}
+
+/*=============DIV================*/
 
 #corpo {
 	width:90%;
@@ -28,6 +56,17 @@ body {
 #fine {
 	clear:both;
 }
+
+#strumento {
+	background-color: #9cbbf3;
+	padding: 0.5em;
+}
+
+#centraTesto {
+	text-align:center;
+}
+
+/*============CLASS================*/
 
 .campoTesto {
 	margin: 0em auto;
