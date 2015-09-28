@@ -20,12 +20,16 @@
 		Data inizio : <h:inputText binding="#{datain}"
 				style="text-align:right; " />
 			<br />
+			Ora inizio inizio : <h:inputText binding="#{orain}"
+				style="text-align:right; " />
+			<br />
 		Data fine : <h:inputText binding="#{dataf}" style="text-align:right; " />
+			<br />
+			Ora fine : <h:inputText binding="#{oraf}" style="text-align:right; " />
 			<br />
 		Motivo: <h:inputText binding="#{motivo}" style="text-align:right;" />
 			<br />
-		Responsabile: <h:inputText binding="#{resp}"
-				style="text-align:right;" />
+		Responsabile: <h:inputText binding="#{resp}" style="text-align:right;" />
 			<br />
 		Nome dipartimento: <h:inputText binding="#{nomed}"
 				style="text-align:right;" />
@@ -34,7 +38,7 @@
 		</h:panelGrid>
 		<!-- action da sistemare  -->
 		<h:commandButton
-			action="#{dati.insutil(cods.value,datain.value,dataf.value, motivo.value, resp.value, nomed.value, 'okInserimento.jsf')}"
+			action="#{dati.insutil(cods.value,datain.value,orain.value,dataf.value,oraf.value, motivo.value, resp.value, nomed.value, 'okInserimento.jsf')}"
 			value="Registra Utilizzo" />
 	</h:form>
 	<br />

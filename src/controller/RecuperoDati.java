@@ -369,7 +369,7 @@ public class RecuperoDati implements Serializable {
 		ResultSet rs = null;
 		boolean res = false;
 		//String result=null;
-		String query="INSERT INTO utstr Values ('"+nuovoutil.getDatain()+"',"+"'"+nuovoutil.getDataf()+"',"+"'"+nuovoutil.getMotivo()+"',"+"'"+nuovoutil.getResp()+"',"+"'"+nuovoutil.getCods()+"',"+"'"+nuovoutil.getNomed()+"')";
+		String query="INSERT INTO utstr Values ('"+nuovoutil.getDatain()+" "+nuovoutil.getOrain()+"',"+"'"+nuovoutil.getDataf()+" "+nuovoutil.getOraf()+"',"+"'"+nuovoutil.getMotivo()+"',"+"'"+nuovoutil.getResp()+"',"+"'"+nuovoutil.getCods()+"',"+"'"+nuovoutil.getNomed()+"')";
 		try {
 			// tentativo di connessione al database
 			con = DriverManager.getConnection( url, user, passwd );

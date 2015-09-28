@@ -8,6 +8,8 @@ public class Utilizzo implements Serializable {
 	private String resp;
 	private String cods;
 	private String nomed;
+	private String orain;
+	private String oraf;
 	
 	public Utilizzo(){
 		datain=null;
@@ -16,6 +18,8 @@ public class Utilizzo implements Serializable {
 		resp=null;
 		cods=null;
 		nomed=null;
+		orain=null;
+		oraf=null;
 		}
 	
 	public void setDatain(String datain){
@@ -58,6 +62,20 @@ public class Utilizzo implements Serializable {
 	}
 	public String getNomed(){
 		return this.nomed;
+	}
+	
+	public void setOrain(String orain){
+		this.orain=orain;
+	}
+	public String getOrain(){
+		return this.orain;
+	}
+	
+	public void setOraf(String oraf){
+		this.oraf=oraf;
+	}
+	public String getOraf(){
+		return this.oraf;
 	}
 	
 }

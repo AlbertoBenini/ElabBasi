@@ -115,20 +115,7 @@ public class ProdView implements Serializable {
  
  public String insman( String cods, String data, String durata, String numop, String iditta, String urgenza, String costo, String destinazione){
 	this.nuovaman = new Manutenzione();
-	/* 
-	 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input. Bisogna fare anche i controlli sui vincoli integrità
-	 * 
-	 * 	RIGUARDO I CONTROLLI: le uniche cose che specifica nella consegna sono di limitare i valori di urgenza a quelli sotto, quindi come controlli potremmo anche essere già a posto
-	 * 
-	 * C'est la vie. Per fare il melodrammatico. 
-	 */
-	
-	/*Se una manutenzione è da inserire per la prima volta, this.editman.cods = "".
-	 * Se this.editman.cods != ""
-	 * Vuol dire che siamo in un update.
-	 * this.editman.codice contiene il codice precedentemente inserito.
-	 * Se è così ->
-	 */
+
 	if(this.editman==null) {
 		ripCambiaMan();
 	}
@@ -156,19 +143,21 @@ public class ProdView implements Serializable {
 	 return "erroreInserimento.jsf";
  }
  
- public String insutil( String cods, String datain, String dataf, String motivo, String resp, String nomed, String destinazione){
+ public String insutil( String cods, String datain, String orain, String dataf, String oraf, String motivo, String resp, String nomed, String destinazione){
 		this.nuovoutil = new Utilizzo();
 		/* 
 		 * TODO: Sistemare qua dentro in modo che siano effettuati controlli sugli input.
 		 * C'est la vie. Per fare il melodrammatico. 
 		 */
-		if(!(cods==null || datain==null || dataf==null || motivo==null || resp==null || nomed==null)) {
+		if(!(cods==null || datain==null || dataf==null || motivo==null || resp==null || nomed==null || orain==null || oraf==null)) {
 			nuovoutil.setCods(cods);
 			nuovoutil.setDatain(datain);
 			nuovoutil.setDataf(dataf);
 			nuovoutil.setMotivo(motivo);
 			nuovoutil.setNomed(nomed);
 			nuovoutil.setResp(resp);
+			nuovoutil.setOrain(orain);
+			nuovoutil.setOraf(oraf);
 			boolean ok=ds.newUtilizzo(nuovoutil);
 			if(ok)
 				return destinazione;
@@ -200,7 +189,6 @@ public class ProdView implements Serializable {
 		 this.editman.setDurata("");
 		 this.editman.setIditta("");
 		 this.editman.setNumop(0);
-		 this.editman.setTesto("");
 		 this.editman.setUrgenza("");
 		 daTornare=this.editman;
 	 } else {
@@ -220,7 +208,6 @@ public class ProdView implements Serializable {
 	 this.editman.setDurata("");
 	 this.editman.setIditta("");
 	 this.editman.setNumop(0);
-	 this.editman.setTesto("");
 	 this.editman.setUrgenza("");
 	 return daTornare;
  }

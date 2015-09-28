@@ -22,15 +22,7 @@ public class Manutenzione implements Serializable{
         testo=null;
 	}
 	
-	//SOlo per debug
-	public void setTesto(String text){
-		this.testo=text;
-	}
-	public String getTesto(){
-		return testo;
-	}
-	
-	//fine debug
+
 	
 	public void setCods(String cods) {
 		this.cods = cods;
